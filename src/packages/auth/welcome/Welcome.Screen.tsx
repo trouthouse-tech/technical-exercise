@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { WelcomeScreenNavigationProp } from './Welcome.types';
 import { styles } from './Welcome.styles';
 import { AUTH_ROUTES } from '@/src/nav/auth/types';
+import { Header } from '@/src/components/header/Header';
+import { Footer } from '@/src/components/footer/Footer';
 
-const WelcomeScreen: React.FC = () => {
+export const WelcomeScreen: React.FC = () => {
   const navigation = useNavigation<WelcomeScreenNavigationProp>();
 
   const goToLoginScreen = useCallback(() => {
@@ -14,12 +16,7 @@ const WelcomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>
-            Welcome to the <Text style={styles.highlight}>Pencil Bible</Text>
-        </Text>
-        <Text style={styles.subtitle}>Technical Exercise</Text>
-    </View>
+        <Header screenName="Technical Exercise" />
       
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -39,9 +36,7 @@ const WelcomeScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
       
-      <Text style={styles.footer}>Pencil Bible Inc</Text>
+      <Footer />
     </View>
   );
 };
-
-export default WelcomeScreen;
