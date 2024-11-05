@@ -12,6 +12,10 @@ export const styles = StyleSheet.create({
         maxWidth: 300,
         marginBottom: 16,
     },
+    buttonContainer: {
+        width: 120,
+        marginTop: 24,
+    },
     label: {
         fontSize: 10,
         color: '#000',
@@ -19,9 +23,9 @@ export const styles = StyleSheet.create({
         fontWeight: '400',
       },
       input: {
-        borderWidth: 1,
-        borderColor: '#CCC',
-        borderRadius: 8,
+        borderWidth: 0.5,
+        borderColor: '#000',
+        borderRadius: 5,
         paddingVertical: 10,
         paddingHorizontal: 12,
         fontSize: 10,
@@ -39,4 +43,9 @@ export const styles = StyleSheet.create({
       passwordGap: {
         marginTop: 16,
       }, 
+      backButton: {
+        position: 'absolute', 
+        top: 16, 
+        left: 16,
+      }
 });

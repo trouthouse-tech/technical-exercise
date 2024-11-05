@@ -8,25 +8,30 @@ import { Footer } from '@/src/components/footer/Footer';
 import { LoginFormInputs, loginSchema, LoginScreenNavigationProp } from './Login.types';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Button from '@/src/components/button/Button';
 
 const LoginScreen: React.FC = () => {
-  const navigation = useNavigation<LoginScreenNavigationProp>();
+  const navigation = useNavigation();
 
   const { control, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
   });
 
-  const goToLoginScreen = useCallback(() => {
-    navigation.navigate(AUTH_ROUTES.LOGIN);
-  }, [navigation]);
-
-  const onSubmit = (data: LoginFormInputs) => {
+  const onSubmit = useCallback((data: LoginFormInputs) => {
     console.log("Login Data:", data);
     
-  };
+  }, []);
+
+  const goBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
+        <View style={styles.backButton}>
+            <Button text="Go back" onPress={goBack} />
+        </View>
+
         <Header screenName="Log In Screen" />
       
       <View style={styles.container}>
@@ -69,6 +74,11 @@ const LoginScreen: React.FC = () => {
         />
         {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
       </View>
+
+      <View style={styles.buttonContainer}>
+        <Button text="Sign In" onPress={handleSubmit(onSubmit)} />
+      </View>
+    
 
       </View>
       
