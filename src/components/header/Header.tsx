@@ -12,8 +12,12 @@ const DEFAULT_TITLE = (
 export const Header: FC<HeaderProps> = ({ title = DEFAULT_TITLE, screenName }) => {
     return (
         <View style={styles.titleContainer}>
-            {title}
-            <Text style={styles.subtitle}>{screenName}</Text>
+            {typeof title === "string" ? (
+                <Text style={styles.title}>{title}</Text>
+            ) : (
+                title
+            )}
+            {screenName && <Text style={styles.subtitle}>{screenName}</Text>}
         </View>
     );
 };
