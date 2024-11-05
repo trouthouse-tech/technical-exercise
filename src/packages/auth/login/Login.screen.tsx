@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { View, Text, TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { styles } from './Login.styles';
 import { AUTH_ROUTES } from '@/src/nav/auth/types';
 import { Header } from '@/src/components/header/Header';
@@ -9,6 +9,7 @@ import { LoginFormInputs, loginSchema, LoginScreenNavigationProp } from './Login
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '@/src/components/button/Button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation();
@@ -17,10 +18,23 @@ const LoginScreen: React.FC = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = useCallback((data: LoginFormInputs) => {
-    console.log("Login Data:", data);
-    
-  }, []);
+  const onSubmit = useCallback(async (data: LoginFormInputs) => {
+    try {
+        // I'd put backend API call here to authenticate the user
+        // For now, I'll just set isLoggedIn to true in AsyncStorage
+        
+        await AsyncStorage.setItem('isLoggedIn', 'true');
+  
+        navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: AUTH_ROUTES.LOGGED_IN }],
+            })
+          );
+      } catch (error) {
+        console.error("Error setting isLoggedIn in AsyncStorage:", error);
+      }
+  }, [navigation]);
 
   const goBack = useCallback(() => {
     navigation.goBack();
