@@ -3,8 +3,8 @@ import { StatusBar, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AUTH_ROUTES, AuthStackParamList } from './types';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import WelcomeScreen from '@/src/packages/auth/welcome';
-import LoginScreen from '@/src/packages/auth/login';
+import LoginScreen from '@/src/packages/auth/login/Login.screen';
+import { WelcomeScreen } from '@/src/packages/auth/welcome';
 
 const { Navigator, Screen } = createNativeStackNavigator<AuthStackParamList>();
 
