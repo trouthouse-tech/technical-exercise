@@ -6,6 +6,7 @@ import AuthStack from '../auth';
 
 const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
+
 const RootStack = () => {
   return (
     <NavigationContainer>
