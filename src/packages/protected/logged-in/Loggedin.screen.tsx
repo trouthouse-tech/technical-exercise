@@ -5,11 +5,15 @@ import { Header } from '@/src/components/header/Header';
 import { Controller, useForm } from 'react-hook-form';
 import { styles } from './LoggedIn.styles';
 import Button from '@/src/components/button/Button';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AUTH_ROUTES } from '@/src/nav/auth/types';
 
 export const LoggedInScreen: React.FC = () => {
   const navigation = useNavigation();
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    await AsyncStorage.removeItem('isLoggedIn');
+    navigation.navigate(AUTH_ROUTES.LOGIN);
   }, [navigation]);
 
   return (
